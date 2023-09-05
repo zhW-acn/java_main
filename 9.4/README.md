@@ -54,6 +54,36 @@ Integer i = (Integer) str;
 ~~~
 
 ## 5.比较
-* == 判断类型地址
+* == 基本类型比较值，引用类型比较地址
 * equals() 引用类型的匹配方法
-* 
+* compareTo() 类需要继承Comparable接口
+~~~java
+public int compareTo(Demo o){
+return((this.x-o.x)>0)?1:(this.x==o.x)?0:-1;
+}
+~~~
+
+## 6.语法结构
+* 类
+一个
+* 属性
+* 方法
+* 代码块
+  * 最优先执行static{}
+* 构造器
+
+## 7.运算符
+* 算数
+* 比较
+* 关系
+* 位
+* 赋值
+* 一元
+* 三目
+
+## 8.访问修饰符
+
+* private
+* default
+* protected
+* public
