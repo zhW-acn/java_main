@@ -7,23 +7,24 @@ package week_1;
  */
 public class Man {
     //静态变量
-    public static int staicVariabl = 1;
+    public static int staticVariable = 1;
     //成员变量
-    public int objVariabl;
+    public int objVariable;
+
 
     //静态初始代码块
     static {
-        staicVariabl = 2;
+        staticVariable = 2;
     }
 
     //对象初始化代码块
     {
-        objVariabl = 88;
+        objVariable = 88;
     }
 
     //构造方法
     public Man() {
-        objVariabl = 99;
+        objVariable = 99;
     }
 
     public static void main(String[] args) {
