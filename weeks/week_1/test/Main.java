@@ -1,4 +1,4 @@
-package weeks.week_1;
+package weeks.week_1.test;
 
 /**
  * @Description: TODO
@@ -6,6 +6,15 @@ package weeks.week_1;
  * @date: 2023/09/06/15:23
  */
 public class Main {
+    private int age = 18;
+
+    public int getAge() {
+        return age;
+    }
+}
+
+class MainSon extends Main{
+
     private int age = 18;
 
     public int getAge() {

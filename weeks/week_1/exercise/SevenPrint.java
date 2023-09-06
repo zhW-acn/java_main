@@ -25,7 +25,7 @@ public class SevenPrint {
                     ok = false;
                 }
             }
-            if (ok && 0 == i % 7) // 标志位放前面少一步取余
+            if (ok && 0 == i % 7)
                 res.add(i);
         }
 

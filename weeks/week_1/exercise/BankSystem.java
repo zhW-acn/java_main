@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -90,10 +91,11 @@ public class BankSystem {
                     String phoneNumberToCheck = scanner.nextLine();
 
                     boolean accountFound = false;
-                    for (Account account : accounts) {
-                        if (account.getAccountNumber().equals(accountToCheck) &&
-                                account.verifyAccount(nameToCheck, phoneNumberToCheck)) {
-                            System.out.println("密码: " + account.getPassword());
+                    Iterator<Account> accountIterator = accounts.iterator();
+                    while (accountIterator.hasNext()) {
+                        if (accountIterator.next().getAccountNumber().equals(accountToCheck) &&
+                                accountIterator.next().verifyAccount(nameToCheck, phoneNumberToCheck)) {
+                            System.out.println("密码: " + accountIterator.next().getPassword());
                             accountFound = true;
                             break;
                         }

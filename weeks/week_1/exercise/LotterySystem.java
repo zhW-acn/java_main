@@ -36,7 +36,7 @@ public class LotterySystem {
 
             int choice = scanner.nextInt();
 
-            if (choice == 1) {
+            if (1 == choice) {
                 int userNumber = users.size() + 1;
                 int randomNumber = new Random().nextInt(101); // 生成0-100的随机数
                 users.add(randomNumber);
@@ -57,7 +57,7 @@ public class LotterySystem {
                 } else {
                     System.out.println("安慰奖");
                 }
-            } else if (choice == 2) {
+            } else if (2 == choice) {
                 System.out.println("退出系统");
                 break;
             }

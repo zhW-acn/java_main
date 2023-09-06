@@ -1,4 +1,4 @@
-package weeks.week_1;
+package weeks.week_1.test;
 
 public class Son extends Person {
     static {
