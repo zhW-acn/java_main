@@ -44,7 +44,7 @@ class Account {
     private String creatAccountNumber() {
         String s = String.format("%03d", accountCounter);
         accountCounter++;
-        return "Bank "+ s;
+        return "Bank " + s;
     }
 
     /**
