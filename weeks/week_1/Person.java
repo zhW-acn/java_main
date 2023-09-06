@@ -1,4 +1,4 @@
-package week_1;
+package weeks.week_1;
 
 /**
  * @Description: TODO

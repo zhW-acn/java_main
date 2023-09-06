@@ -1,4 +1,4 @@
-package week_1.exercise;
+package weeks.week_1.exercise;
 
 import java.util.ArrayList;
 import java.util.Random;
