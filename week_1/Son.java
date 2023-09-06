@@ -1,3 +1,5 @@
+package week_1;
+
 public class Son extends Person {
     static {
         System.out.println("子类静态代码块");
