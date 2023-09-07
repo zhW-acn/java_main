@@ -6,5 +6,7 @@ package weeks.week_1.test;
  * @date: 2023/09/06/17:58
  */
 public class test {
+    public static void main(String[] args) {
 
+    }
 }
