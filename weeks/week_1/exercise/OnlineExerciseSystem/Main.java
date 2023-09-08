@@ -28,7 +28,10 @@ public class Main {
             int input = scanner.nextInt();
 
             if (input == 1) {
-                System.out.println("录入题目");
+                if(Tools.insert()==null) {
+                    continue;
+                }
+                System.out.println("录入成功");
             } else if (input == 2) {
                 System.out.println("开始考试");
             } else if (input == 3) {
