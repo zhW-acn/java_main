@@ -1,5 +1,8 @@
 package weeks.week_1.exercise.OnlineExerciseSystem;
 
+import lombok.Data;
+import lombok.SneakyThrows;
+
 import java.util.Scanner;
 
 /**
@@ -8,6 +11,29 @@ import java.util.Scanner;
  * @date: 2023/09/07/13:13
  */
 public class Tools {
+    /**
+     * 这个计时器用于管理考试线程，不用输出
+     */
+    @Data
+    static class TimerCountThread implements Runnable {
+        public static int second = 0;// 秒
+
+        @SneakyThrows
+        @Override
+        public void run() {
+            Thread exerciseThread = new Thread(new StartExerciseThread());
+            exerciseThread.start();
+            while (second < 60 * 3) {
+                if (!exerciseThread.isAlive()) {
+                    break;
+                }
+                second++;
+                Thread.sleep(1000);
+            }
+            System.out.println("考试结束");
+        }
+
+    }
 
     public static void printMenu() {
         System.out.println("--------------");
@@ -18,15 +44,15 @@ public class Tools {
         System.out.print("请输入：");
     }
 
-    public static Question insert(){
+    public static Question insertQuestion() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n录入题目");
+        System.out.println("录入题目");
         System.out.print("请输入题目编号：");
         int num = scanner.nextInt();
         System.out.print("请输入题目描述：");
         String describe = scanner.next();
         Question question = new Question(num, describe);
-        if(!QuestionManager.isRepetition(question)){
+        if (!QuestionManager.isRepetition(question)) {
             System.out.println("题目编号已存在,请重新录入");
             return null;
         }
@@ -34,4 +60,22 @@ public class Tools {
         QuestionManager.printAllQuestion();
         return question;
     }
+
+    public static void startExercise() {
+        Thread timerCountThread = new Thread(new TimerCountThread());
+        timerCountThread.start();
+        try {
+            timerCountThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if(!timerCountThread.isAlive() && StartExerciseThread.canWeStartExercise()){// 是否进行了考试
+            System.out.println("你做对了"+StartExerciseThread.correctQuestion+"题，用时"+TimerCountThread.second+"秒");
+        }
+    }
+
+    public static void main(String[] args) {
+        startExercise();
+    }
+
 }

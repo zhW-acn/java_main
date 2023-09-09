@@ -1,10 +1,7 @@
 package weeks.week_1.exercise.OnlineExerciseSystem;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description: 题目管理类
@@ -12,6 +9,13 @@ import java.util.Map;
  * @date: 2023/09/07/14:08
  */
 public class QuestionManager {
+
+    public static TreeSet<Question> questions = new TreeSet<>(new Comparator<Question>() {
+        @Override
+        public int compare(Question o1, Question o2) {
+            return o1.getNumber() - o2.getNumber();
+        }
+    });
 
     /**
      * 录入题目
@@ -31,11 +35,11 @@ public class QuestionManager {
 
     /**
      * 读取题目类至list，返回该list
+     *
      * @return List
      */
-    public static List<Question> reloadAllQuestion() {
+    public static TreeSet<Question> reloadAllQuestion() {
 
-        List<Question> questions = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(Question.PATH);
              ObjectInputStream ois = new ObjectInputStream(fis);) {
             while (true) {
@@ -70,24 +74,69 @@ public class QuestionManager {
 
     /**
      * 如果已存在题目编号，返回false
+     *
      * @param question
      * @return
      */
     public static boolean isRepetition(Question question) {
-        List<Question> allQuestions = reloadAllQuestion();
-        for(Question targetQuestion :allQuestions){
-            if(targetQuestion.getNumber() == question.getNumber()) {
+        TreeSet<Question> allQuestions = reloadAllQuestion();
+        for (Question targetQuestion : allQuestions) {
+            if (targetQuestion.getNumber() == question.getNumber()) {
                 return false;
             }
         }
         return true;
     }
 
-    public static void printAllQuestion(){
-        List<Question> questions = reloadAllQuestion();
-        for(Question question : questions){
+    /**
+     * 打印所有题目
+     */
+    public static void printAllQuestion() {
+        TreeSet<Question> questions = reloadAllQuestion();
+        for (Question question : questions) {
             System.out.println(question.toString());
         }
     }
+
+    public static int questionsNum() {
+        int num = 0;
+        TreeSet<Question> questions = reloadAllQuestion();
+        for (Question question : questions) {
+            num++;
+        }
+        return num;
+    }
+
+    public static void batchImportQuestions(int count) {
+        for (int i = 1; i <= count; i++) {
+            QuestionManager.inputQuestion(new Question(i, "第" + i + "题的描述"));
+        }
+    }
+
+    public static TreeSet<Question> selectQuestions() {
+        int randomNum = (int) (Math.random() * (QuestionManager.questionsNum() - 10 + 1));
+        TreeSet<Question> startQuestion = new TreeSet<>(new Comparator<Question>() {
+            @Override
+            public int compare(Question o1, Question o2) {
+                return o1.getNumber() - o2.getNumber();
+            }
+        });
+        int selectNum = 11; //取10个
+        for (Question question : questions) {
+            if (question.getNumber() == randomNum || selectNum <= 10) {
+                selectNum--;
+                if(selectNum == 0){
+                    break;
+                }
+                startQuestion.add(question);
+            }
+        }
+        return startQuestion;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(selectQuestions());
+    }
+
 
 }

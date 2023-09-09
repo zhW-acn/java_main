@@ -20,9 +20,4 @@ public class Question implements Serializable {
     private int number;// 序号
     private String describe;// 题目描述
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Question question = new Question();
-        QuestionManager.inputQuestion(new Question(1,"描述"));
-        QuestionManager.reloadAllQuestion();
-    }
 }

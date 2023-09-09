@@ -26,14 +26,14 @@ public class Main {
         while (true) {
             Tools.printMenu();
             int input = scanner.nextInt();
-
             if (input == 1) {
-                if(Tools.insert()==null) {
+                if (Tools.insertQuestion() == null) {
                     continue;
                 }
                 System.out.println("录入成功");
             } else if (input == 2) {
                 System.out.println("开始考试");
+                Tools.startExercise();
             } else if (input == 3) {
                 System.out.println("退出");
                 break;
