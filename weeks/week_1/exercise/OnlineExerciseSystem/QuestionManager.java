@@ -55,8 +55,6 @@ public class QuestionManager {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
 //        List<Question> questionsList = new ArrayList<>();
 //        try (Writer writer = new FileWriter(Question.PATH);
 //             BufferedWriter bufferedWriter = new BufferedWriter(writer);
@@ -98,6 +96,10 @@ public class QuestionManager {
         }
     }
 
+    /**
+     * 返回题库题数
+     * @return num
+     */
     public static int questionsNum() {
         int num = 0;
         TreeSet<Question> questions = reloadAllQuestion();
@@ -107,12 +109,20 @@ public class QuestionManager {
         return num;
     }
 
+    /**
+     * 批量插入题目
+     * @param count
+     */
     public static void batchImportQuestions(int count) {
         for (int i = 1; i <= count; i++) {
             QuestionManager.inputQuestion(new Question(i, "第" + i + "题的描述"));
         }
     }
 
+    /**
+     * 选择10题
+     * @return
+     */
     public static TreeSet<Question> selectQuestions() {
         int randomNum = (int) (Math.random() * (QuestionManager.questionsNum() - 10 + 1));
         TreeSet<Question> startQuestion = new TreeSet<>(new Comparator<Question>() {
@@ -125,7 +135,7 @@ public class QuestionManager {
         for (Question question : questions) {
             if (question.getNumber() == randomNum || selectNum <= 10) {
                 selectNum--;
-                if(selectNum == 0){
+                if (selectNum == 0) {
                     break;
                 }
                 startQuestion.add(question);

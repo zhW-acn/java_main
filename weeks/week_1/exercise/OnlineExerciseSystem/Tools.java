@@ -23,8 +23,8 @@ public class Tools {
         public void run() {
             Thread exerciseThread = new Thread(new StartExerciseThread());
             exerciseThread.start();
-            while (second < 60 * 3) {
-                if (!exerciseThread.isAlive()) {
+            while (second < 60 * 3) {// 三分钟
+                if (!exerciseThread.isAlive()) {// 如果线程死亡就跳出
                     break;
                 }
                 second++;
@@ -32,9 +32,11 @@ public class Tools {
             }
             System.out.println("考试结束");
         }
-
     }
 
+    /**
+     * 打印菜单
+     */
     public static void printMenu() {
         System.out.println("--------------");
         System.out.println("请选择操作：");
@@ -44,6 +46,10 @@ public class Tools {
         System.out.print("请输入：");
     }
 
+    /**
+     * 录入题目
+     * @return
+     */
     public static Question insertQuestion() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("录入题目");
@@ -61,21 +67,19 @@ public class Tools {
         return question;
     }
 
+    /**
+     * 开始考试
+     */
     public static void startExercise() {
-        Thread timerCountThread = new Thread(new TimerCountThread());
+        Thread timerCountThread = new Thread(new TimerCountThread());// 启动计时器
         timerCountThread.start();
         try {
             timerCountThread.join();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if(!timerCountThread.isAlive() && StartExerciseThread.canWeStartExercise()){// 是否进行了考试
-            System.out.println("你做对了"+StartExerciseThread.correctQuestion+"题，用时"+TimerCountThread.second+"秒");
+        if (!timerCountThread.isAlive() && StartExerciseThread.canWeStartExercise()) {// 是否进行了考试
+            System.out.println("\n你做对了" + StartExerciseThread.correctQuestion + "题，用时" + TimerCountThread.second + "秒");
         }
     }
-
-    public static void main(String[] args) {
-        startExercise();
-    }
-
 }
