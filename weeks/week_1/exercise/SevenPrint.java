@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 /**
- * @Description: 数7游戏
+ * @Description: 数7游戏，想复杂了，contains就能判断的我还写这么多
  * @author: acn
  * @date: 2023/09/06/10:49
  */
