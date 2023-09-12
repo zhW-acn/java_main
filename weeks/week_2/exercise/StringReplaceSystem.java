@@ -21,9 +21,7 @@ public class StringReplaceSystem {
     public static Scanner scanner = new Scanner(System.in);
 
     static class Tools {
-        private static Map<String, Integer> N_WORD = new HashMap<>(); // 敏感词
-        private static int nwordcount = 0; // 统计
-        private static final String REPLACE_STRING = "*";
+        private static final Map<String, Integer> N_WORD = new HashMap<>(); // 敏感词
 
         Tools() {
             N_WORD.put("1", 0);
@@ -43,7 +41,6 @@ public class StringReplaceSystem {
             if (2 == model) {
                 return target;
             }
-            new Tools();
             String resString = target;
             for (String s : N_WORD.keySet()) {
                 int index = -1;
