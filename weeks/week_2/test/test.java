@@ -1,5 +1,6 @@
 package weeks.week_2.test;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -25,7 +26,7 @@ public class test {
 //            public int compare(Object o1, Object o2) {
 //                return 0;
 //            }
-//        });palera1n
+//        });
 //
 //        class MyComparable implements Comparable{
 //
@@ -34,8 +35,18 @@ public class test {
 //                return 0;
 //            }
 //        }
-        String s1 = "1" + "2" + "3www";
-        StringBuffer s2 = new StringBuffer(Integer.MAX_VALUE - 9);
-        System.out.println(s2.length()+" "+s2.capacity());
+//        String s1 = "1" + "2" + "3www";
+//        StringBuffer s2 = new StringBuffer(Integer.MAX_VALUE - 9);
+//        System.out.println(s2.length() + " " + s2.capacity());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2000);
+        calendar.set(Calendar.MONTH, 7);
+        calendar.set(Calendar.DAY_OF_MONTH, 8);
+        calendar.set(Calendar.HOUR, 5);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(calendar.getTime()));
     }
 }
