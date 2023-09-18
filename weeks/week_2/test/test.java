@@ -39,14 +39,18 @@ public class test {
 //        StringBuffer s2 = new StringBuffer(Integer.MAX_VALUE - 9);
 //        System.out.println(s2.length() + " " + s2.capacity());
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2000);
-        calendar.set(Calendar.MONTH, 7);
-        calendar.set(Calendar.DAY_OF_MONTH, 8);
-        calendar.set(Calendar.HOUR, 5);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, 2000);
+//        calendar.set(Calendar.MONTH, 7);
+//        calendar.set(Calendar.DAY_OF_MONTH, 8);
+//        calendar.set(Calendar.HOUR, 5);
+//        calendar.set(Calendar.MINUTE, 0);
+//        calendar.set(Calendar.SECOND, 0);
+//
+//        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(calendar.getTime()));
+        Map integerHashMap = new HashMap<>();
+        integerHashMap.put(1,1);
 
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(calendar.getTime()));
+        System.out.println(integerHashMap.size());
     }
 }
