@@ -15,7 +15,6 @@ public class test {
     public static void main(String[] args) {
         try (InputStream is = new FileInputStream(sourcePath);
              OutputStream os = new FileOutputStream(targetPath)) {
-
             byte[] bytes = new byte[is.available()];
             is.read(bytes);
             os.write(bytes);
