@@ -498,7 +498,7 @@ JDK20新特性：
 
 ​    通过接口私有方法，可以进一步增强接口的灵活性。
 
-```java
+``` java
 package com.iflytek.jdk9;
 //私有接口方法
 public interface Sample01 {
@@ -527,7 +527,7 @@ private String getIp(){
 
 Try自动关闭IO流。
 
-```java
+``` java
  	final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 
 	 try(br){
@@ -543,7 +543,7 @@ Try自动关闭IO流。
 
 ​    没有此新特性之前，释放资源的代码 比主体代码还多，明显不适宜。
 
-```java
+``` java
 package com.iflytek.jdk9;
 
 import java.io.*;
@@ -554,7 +554,7 @@ public class Sample02 {
         File target = new File("d:/demo1.jpg");
         //通过try块自动关闭资源
         try (InputStream fis = new FileInputStream(source);
-             OutputStream fos = new FileOutputStream(target);){
+             OutputStream fos = new FileOutputStream(target)){
             byte[] bs = new byte[1024];
             int len;
             //利用read方法循环读取的字节数据，并进行处理
@@ -577,7 +577,7 @@ public class Sample02 {
 
 ​	局部变量类型推断：
 
-```java
+``` java
 	var list=new ArrayList<String>();
 
 	list.add("zhangsan");
@@ -589,7 +589,7 @@ public class Sample02 {
 
   示例代码
 
-```java
+``` java
 package com.iflytek.jdk10;
 
 import java.util.ArrayList;
@@ -597,7 +597,7 @@ import java.util.ArrayList;
 //var动态类型推断
 public class Sample03 {
     public static void main(String[] args) {
-        var str = new String("a");
+        var str = "a";
         var str1 = "a";
         System.out.println(str instanceof String);
         System.out.println(str1 instanceof String);
@@ -605,12 +605,12 @@ public class Sample03 {
         list.add("abc");
         //list.add(321);
         //var l = 100l; //var在直接赋值数据类型时返回对应数据类型
-        var l = Long.valueOf(100l); //要返回包装类型对象要用valueOf方法
+        var l = Long.valueOf(100L); //要返回包装类型对象要用valueOf方法
         System.out.println(l instanceof Long);
 
-       var b = Boolean.valueOf(true);
-       System.out.println(b instanceof Boolean);
-}
+        var b = Boolean.valueOf(true);
+        System.out.println(b instanceof Boolean);
+    }
 ```
 
 不可变集合：List.copyOf（提高数据安全性）
@@ -639,7 +639,7 @@ public class Sample04 {
 
 #### 4.Java11 新的String方法：
 
-```java
+``` java
 package com.iflytek.jdk11;
 
 //新的String方法
@@ -672,7 +672,7 @@ public class Sample05 {
 
 示例代码
 
-```java
+``` java
 package com.iflytek.jdk12;
 
 import java.util.Random;
@@ -728,7 +728,7 @@ public static void main(String[] args) {
 
 ​	
 
-```java
+``` java
 String html="""
 			abc
 			def

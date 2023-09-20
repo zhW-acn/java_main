@@ -24,7 +24,7 @@ public class QuestionManager {
      */
     public static void inputQuestion(Question question) {
         try (OutputStream outputStream = new FileOutputStream(Question.PATH, true);// true,追加
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);) {
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
             // 写一个对象到磁盘 序列化
             objectOutputStream.writeObject(question);
 //        objectOutputStream.writeChar('\n');
@@ -41,7 +41,7 @@ public class QuestionManager {
     public static TreeSet<Question> reloadAllQuestion() {
 
         try (FileInputStream fis = new FileInputStream(Question.PATH);
-             ObjectInputStream ois = new ObjectInputStream(fis);) {
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
             while (true) {
                 try {
                     // 拿到对象 反序列化

@@ -9,18 +9,25 @@ import java.io.*;
  */
 public class test {
 
-    public static String sourcePath = "";
-    public static String targetPath = "";
+    public static String sourcePath = "F:\\java_main\\weeks\\week_3\\exercise\\targetDir\\a.txt";
+    public static String targetPath = "F:\\java_main\\weeks\\week_3\\exercise\\targetDir\\a\\a.txt";
 
     public static void main(String[] args) {
-        try(InputStream is = new FileInputStream(sourcePath);
-            OutputStream os = new FileOutputStream(targetPath)){
-            byte[] b = new byte[is.available()];
-            os.write(b);
-        }catch (IOException e){
+        try (InputStream is = new FileInputStream(sourcePath);
+             OutputStream os = new FileOutputStream(targetPath)) {
+
+            byte[] bytes = new byte[is.available()];
+            is.read(bytes);
+            os.write(bytes);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
+//            byte[] buf = new byte[1024 * 1024];
+//            int len;
+//            while ((len = is.read(buf)) != -1) {
+//                os.write(buf, 0, len);
+//            }
 }

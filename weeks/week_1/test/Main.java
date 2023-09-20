@@ -6,7 +6,7 @@ package weeks.week_1.test;
  * @date: 2023/09/06/15:23
  */
 public class Main {
-    private int age = 18;
+    private final int age = 18;
 
     public int getAge() {
         return age;
@@ -15,7 +15,7 @@ public class Main {
 
 class MainSon extends Main{
 
-    private int age = 18;
+    private final int age = 18;
 
     public int getAge() {
         return age;
