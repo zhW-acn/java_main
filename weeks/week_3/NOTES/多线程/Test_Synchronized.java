@@ -1,4 +1,4 @@
-package 瞎学的.多线程;
+package weeks.week_3.NOTES.多线程;
 
 /**
  * @Description: TODO
