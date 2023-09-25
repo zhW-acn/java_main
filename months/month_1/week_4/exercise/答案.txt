@@ -1,0 +1,59 @@
+SELECT * FROM tp_watchs
+
+-- 1.查询tp_watchs表当中所有记录的总和，表述格式为
+SELECT COUNT(*) AS `总数` FROM `tp_watchs`
+
+-- 2.查询tp_watchs当中cover字段前缀为https://cs.certina.ch/地址的所有的条目中，big字段小于30以内的所有字段
+SELECT * FROM tp_watchs
+WHERE tp_watchs.cover LIKE 'https://cs.certina.ch/%' AND tp_watchs.big < 30
+
+-- 3.使用聚合函数(having)查找出tp_watchs表中品牌(brand_zh)为浪琴的品牌平均价格为多少
+SELECT tp_watchs.brand_zh AS `品牌`, AVG(tp_watchs.money) AS `平均价格` FROM tp_watchs
+GROUP BY tp_watchs.brand_zh
+HAVING tp_watchs.brand_zh = '浪琴'
+
+-- 4.	找出tp_watchs当中money字段在100-1000以内的所有的条目（包含100，不包含1000）
+SELECT * FROM tp_watchs
+WHERE tp_watchs.id BETWEEN 100 AND 1000
+
+-- 5.	查询tp_watchs 第4页的所有数据（每页显示150条数据）
+SELECT * FROM tp_watchs
+LIMIT 450,150 -- 150 条数据每页，第 4 页从 450 开始
+
+-- 6.	找出tp_watchs表当中所有品牌(brand_zh)的商品总数
+SELECT tp_watchs.brand_zh AS `品牌`,COUNT(*) AS `商品总数`
+FROM tp_watchs
+GROUP BY tp_watchs.brand_zh
+
+-- 7.	找出2016年所有品牌(brand_zh)当中，价格最低的条目id,name,最小金额，品牌，日期
+SELECT id,name,min(money) as `最小金额`,brand_zh as `品牌`,date as `日期` FROM tp_watchs WHERE date BETWEEN '2016-01-01' and '2016-12-31' GROUP BY brand_zh
+
+SELECT tp_watchs.id AS `id`,
+       tp_watchs.name AS `name`,
+       MIN(tp_watchs.money) AS `最小金额`,
+       tp_watchs.brand_zh AS `品牌`,
+       date AS `日期`
+FROM tp_watchs
+WHERE date LIKE '2016%'
+GROUP BY tp_watchs.brand_zh
+
+
+-- 8.	找到name包含为DS NEW CASCADEUR的产品的所有信息，将查询的条目以id进行降序排列
+SELECT * FROM tp_watchs
+WHERE tp_watchs.`name` LIKE '%DS NEW CASCADEUR%'
+ORDER BY tp_watchs.id DESC
+
+-- 9.	找出tp_watchs表当中不同的品牌卖出的商品与未卖出的商品的总数，卖出去的字段为sale(1表示卖出，0表示未卖出)
+SELECT tp_watchs.brand_zh AS `品牌`,
+				COUNT(*) AS `总数`,
+				CASE WHEN tp_watchs.sale = 1 THEN '已卖出'
+				 WHEN tp_watchs.sale = 0 THEN '未卖出' END AS `情况`
+FROM tp_watchs
+GROUP BY tp_watchs.brand_zh,sale
+
+-- 10.	使用查找不同品牌，价格在2000以内，日期在2018年1月1日之前，且状态为卖出的商品的总金额
+SELECT tp_watchs.brand_zh AS `品牌`,
+				SUM(tp_watchs.money) AS `总价`
+FROM tp_watchs
+WHERE tp_watchs.money < 2000 AND YEAR(tp_watchs.date) < 2018 AND tp_watchs.sale = 1
+GROUP BY tp_watchs.brand_zh
