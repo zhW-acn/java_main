@@ -47,25 +47,24 @@ public class JDBC {
 
         Savepoint savepoint = connection.setSavepoint();
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 1000; i++) {
             try {
-                if (i % 10 == 0) {
-                    int e = 10 / 0;
-                }
-                if (i % 5 == 0) {
-                    connection.commit();
-                    savepoint = connection.setSavepoint();
-                }
+
                 preparedStatement.setString(1, i + "");
                 preparedStatement.setString(2, i + "");
                 preparedStatement.execute();
+                if (i % 500 == 0) {
+                    savepoint = connection.setSavepoint();
+                }
+                if (i % 1000 == 0) {
+                    int e = 1 / 0;
+                }
             } catch (Exception e) {
                 falseList.add(i); // 保存插入失败的编号
                 ioStorage(getCurrentTime()+"\t第"+i+"个插入失败\t异常类型："+e.getMessage()+"\n");
                 connection.rollback(savepoint);
             } finally {
                 connection.commit();
-                savepoint = connection.setSavepoint();
             }
         }
     }
