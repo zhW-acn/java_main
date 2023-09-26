@@ -8,13 +8,14 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * @Description: TODO
+ * @Description: 模拟事务执行失败，保存存档点，写入日志文件。
  * @author: acn
  * @date: 2023/09/26/9:49
  */
 public class JDBC {
 
-    public static List<Integer> falseList = new ArrayList<>(10);
+    public static List<Integer> falseList = new ArrayList<>(10); // 用list保存插入失败的编号。。这样的话还需要定义一个对象，
+    // 这个对象就是一条数据库记录，然后下次插入就反序列化 get对象属性再尝试插入。懒得写了就这样吧
     public JDBC() throws SQLException {
     }
 
@@ -59,7 +60,7 @@ public class JDBC {
                 preparedStatement.setString(2, i + "");
                 preparedStatement.execute();
             } catch (Exception e) {
-                falseList.add(i);
+                falseList.add(i); // 保存插入失败的编号
                 ioStorage(getCurrentTime()+"\t第"+i+"个插入失败\t异常类型："+e.getMessage()+"\n");
                 connection.rollback(savepoint);
             } finally {
