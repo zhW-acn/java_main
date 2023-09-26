@@ -1,8 +1,11 @@
 package months.month_1.week_4.test;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.*;
+import java.util.Scanner;
 
 /**
  * @Description: TODO
@@ -14,13 +17,33 @@ public class testJDBC {
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+            // 在com.mysql.jdbc.Driver类中存在静态代码块
+            /*
+                static {
+				        try {
+				            java.sql.DriverManager.registerDriver(new Driver());
+				        } catch (SQLException E) {
+				            throw new RuntimeException("Can't register driver!");
+				        }
+				}
+            */
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
+    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "acane");
+    Statement statement = connection.createStatement();
+    ResultSet resultSet;
+    String sql;
+
+    public testJDBC() throws SQLException {
+    }
+
+
     @Test
-    public void teststatement() throws SQLException { // 使用Statement
+    public void testStatement() throws SQLException { // 使用Statement
         //2. 建立连接（Connection）
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "acane");
@@ -58,10 +81,9 @@ public class testJDBC {
     }
 
     @Test
-    public void testprepare() throws SQLException {// 使用PreparedStatement
+    public void testPrepare() throws SQLException {// 使用PreparedStatement
 
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "acane");
-        String sql = "select * from test where username = ? and password = ?";
+        sql = "select * from test where username = ? and password = ?";
         String input1 = "1";
         String input2 = "1";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -70,7 +92,7 @@ public class testJDBC {
         preparedStatement.setString(1, input1);
         preparedStatement.setString(2, input2);
 
-        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             System.out.println(
                     resultSet.getInt("id") + "\t" +// 字段
@@ -80,4 +102,39 @@ public class testJDBC {
         }
     }
 
+    @Test
+    public void testExe() throws SQLException {
+        sql = "SELECT tp_watchs.id AS `id`,\n       tp_watchs.name AS `name`,\n       MIN(tp_watchs.money) AS `最小金额`,\n       tp_watchs.brand_zh AS `品牌`,\n       date AS `日期`\nFROM tp_watchs\nWHERE date LIKE '2016%'\nGROUP BY tp_watchs.brand_zh";
+
+        resultSet = statement.executeQuery(sql);
+
+        while (resultSet.next()) {
+            System.out.println(resultSet.getInt("id"));
+        }
+
+    }
+
+
+
+    @Test
+    public void testCommit() throws SQLException {
+        connection.setAutoCommit(false);
+        sql = "insert into test(username,password) values(?,?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        for (int i = 0; i < 5; i++) {
+            preparedStatement.setString(1,i+"");
+            preparedStatement.setString(2,i+"");
+            preparedStatement.execute();
+        }
+        connection.commit();
+
+    }
+
+
+    @After
+    public void close() throws SQLException {
+
+        connection.close();
+    }
 }

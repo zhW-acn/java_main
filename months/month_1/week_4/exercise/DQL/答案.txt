@@ -25,6 +25,7 @@ SELECT tp_watchs.brand_zh AS `品牌`,COUNT(*) AS `商品总数`
 FROM tp_watchs
 GROUP BY tp_watchs.brand_zh
 
+
 -- 7.	找出2016年所有品牌(brand_zh)当中，价格最低的条目id,name,最小金额，品牌，日期
 SELECT id,name,min(money) as `最小金额`,brand_zh as `品牌`,date as `日期` FROM tp_watchs WHERE date BETWEEN '2016-01-01' and '2016-12-31' GROUP BY brand_zh
 
