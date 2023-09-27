@@ -1,18 +1,18 @@
 TCP
 -
-![TCP.png](../res/img/TCP.png)
+![TCP.png](../../../../res/img/TCP.png)
 
 TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的、 基于IP的传输层协议。提供了流量控制、拥塞控制、超时重传等机制
 
 # 三次握手
-![三次握手.png](../res/img/三次握手.png)
+![三次握手.png](../../../../res/img/三次握手.png)
 
 第一次和第二次发送在服务器角度那里只能确认客户端的链接是没问题的，<br>
 第三次客户端发送给服务器是确认了服务器与客户端的连接
 
 
 # 四次挥手
-![四次挥手.png](../res/img/四次挥手.png)
+![四次挥手.png](../../../../res/img/四次挥手.png)
 
 第一次，客户端发送请求断开<br>
 第二次，服务器应答，准备关闭<br>
@@ -21,15 +21,15 @@ TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、
 
 UDP
 -
-![UDP.png](../res/img/UDP.png)
+![UDP.png](../../../../res/img/UDP.png)
 
 UDP(User Datagram Protocol，用户数据报协议)是一种传输层的协议，它提供不可靠服务，它是无连接的，所以不存在建立连接需要的时延。
 
 
 ## Socket是在TCP，UDP之上的抽象层
-![Socket.png](../res/img/Socket.png)
+![Socket.png](../../../../res/img/Socket.png)
 ## 流程
-![Socket流程.png](../res/img/Socket流程.png)
+![Socket流程.png](../../../../res/img/Socket流程.png)
 
 ## TCP
 ```java
