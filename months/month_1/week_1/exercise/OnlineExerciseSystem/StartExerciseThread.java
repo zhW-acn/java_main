@@ -22,7 +22,7 @@ public class StartExerciseThread implements Runnable {
         System.out.println("模拟考试场景，答错0，答对1。开始答题");
         for (Question question : QuestionManager.selectQuestions()) {
             System.out.println("第" + question.getNumber() + "题：" + question.getDescribe());
-            if (1 == scanner.nextInt()) {
+            if (question.getAnswer().equals(scanner.nextLine())) {
                 correctQuestion++;
             }
         }

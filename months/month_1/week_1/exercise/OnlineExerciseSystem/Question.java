@@ -19,5 +19,6 @@ public class Question implements Serializable {
     public final static String PATH = "Question.txt";
     private int number;// 序号
     private String describe;// 题目描述
+    private String answer; // 答案
 
 }

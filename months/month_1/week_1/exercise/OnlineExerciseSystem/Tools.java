@@ -11,6 +11,8 @@ import java.util.Scanner;
  * @date: 2023/09/07/13:13
  */
 public class Tools {
+
+    static Scanner scanner = new Scanner(System.in);
     /**
      * 这个计时器用于管理考试线程，不用输出
      */
@@ -51,13 +53,15 @@ public class Tools {
      * @return
      */
     public static Question insertQuestion() {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("录入题目");
         System.out.print("请输入题目编号：");
         int num = scanner.nextInt();
         System.out.print("请输入题目描述：");
-        String describe = scanner.next();
-        Question question = new Question(num, describe);
+        String describe = scanner.nextLine();
+        System.out.print("请输入题目答案：");
+        String answer = scanner.nextLine();
+        Question question = new Question(num, describe, answer);
         if (!QuestionManager.isRepetition(question)) {
             System.out.println("题目编号已存在,请重新录入");
             return null;
@@ -80,6 +84,9 @@ public class Tools {
         }
         if (!timerCountThread.isAlive() && StartExerciseThread.canWeStartExercise()) {// 是否进行了考试
             System.out.println("\n你做对了" + StartExerciseThread.correctQuestion + "题，用时" + TimerCountThread.second + "秒");
+            System.out.println("请输入姓名：");
+            String name = scanner.nextLine();
+            JDBC.writeInDdataBase(name,StartExerciseThread.correctQuestion,TimerCountThread.second);
         }
     }
 }

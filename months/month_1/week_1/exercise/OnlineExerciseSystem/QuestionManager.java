@@ -25,7 +25,7 @@ public class QuestionManager {
     public static void inputQuestion(Question question) {
         try (OutputStream outputStream = new FileOutputStream(Question.PATH, true);// true,追加
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
-            // 写一个对象到磁盘 序列化
+            // 序列化
             objectOutputStream.writeObject(question);
 //        objectOutputStream.writeChar('\n');
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class QuestionManager {
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             while (true) {
                 try {
-                    // 拿到对象 反序列化
+                    // 反序列化
                     questions.add((Question) ois.readObject());
                     byte[] head = new byte[4]; // 跳过读取头信息。不跳过会报 invalid type code: AC
                     fis.read(head);
@@ -98,6 +98,7 @@ public class QuestionManager {
 
     /**
      * 返回题库题数
+     *
      * @return num
      */
     public static int questionsNum() {
@@ -111,16 +112,18 @@ public class QuestionManager {
 
     /**
      * 批量插入题目
+     *
      * @param count
      */
     public static void batchImportQuestions(int count) {
         for (int i = 1; i <= count; i++) {
-            QuestionManager.inputQuestion(new Question(i, "第" + i + "题的描述"));
+            QuestionManager.inputQuestion(new Question(i, "第" + i + "题的描述", i + ""));
         }
     }
 
     /**
      * 选择10题
+     *
      * @return
      */
     public static TreeSet<Question> selectQuestions() {
@@ -145,6 +148,7 @@ public class QuestionManager {
     }
 
     public static void main(String[] args) {
+        batchImportQuestions(100);
         System.out.println(selectQuestions());
     }
 
