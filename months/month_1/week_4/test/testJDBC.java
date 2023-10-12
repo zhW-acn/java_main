@@ -102,6 +102,38 @@ public class testJDBC {
         }
     }
 
+    @Test // 更优雅的带参增删改
+    public boolean execupdate(String sql, Object... params) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        if (params != null) {
+
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
+            }
+        }
+        if (ps.executeUpdate() != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Test
+    public ResultSet execQuery(String sql, Object... params) {
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(sql);
+            if (params != null) {
+                for (int i = 0; i < params.length; i++) {
+                    ps.setObject(i + 1, params[i]);
+                }
+            }
+            return ps.executeQuery();
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+
     // 遇到了：this is incompatible with sql_mode=only_full_group_by
     // 如何解决：SET @@global.sql_mode ='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
     @Test
@@ -117,7 +149,6 @@ public class testJDBC {
     }
 
 
-
     @Test
     public void testCommit() throws SQLException {
         connection.setAutoCommit(false);
@@ -125,8 +156,8 @@ public class testJDBC {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         for (int i = 0; i < 5; i++) {
-            preparedStatement.setString(1,i+"");
-            preparedStatement.setString(2,i+"");
+            preparedStatement.setString(1, i + "");
+            preparedStatement.setString(2, i + "");
             preparedStatement.execute();
         }
         connection.commit();
