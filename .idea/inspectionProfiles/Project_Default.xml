@@ -68,6 +68,12 @@
       <option name="ADDITIONAL_TAGS" value="Description:,author:,date:" />
     </inspection_tool>
     <inspection_tool class="MapOrSetKeyShouldOverrideHashCodeEquals" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PublicField" enabled="false" level="INFORMATION" enabled_by_default="false">
+      <option name="ignoreEnums" value="false" />
+      <option name="ignorableAnnotations">
+        <value />
+      </option>
+    </inspection_tool>
     <inspection_tool class="SpellCheckingInspection" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES">
       <option name="processCode" value="true" />
       <option name="processLiterals" value="true" />
