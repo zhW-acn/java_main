@@ -1,4 +1,4 @@
-package months.month_1.week_3.NOTES.多线程;
+package months.month_1.week_3.NOTES.Thread;
 
 /**
  * @Description: TODO

@@ -31,10 +31,23 @@ public class test {
 //            }
 }
 
-enum Season{
-    SPRING;
+enum Season {
+    SPRING("春天", 1), SUMMER("夏天", 2), AUTUMN("秋天", 3), WINTER("冬天", 4); // 枚举类第一行必须是枚举项
+
+    String name;
+    int index;
+
+    Season(String name, int index) {
+        this.name = name;
+        this.index = index;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
     public static void main(String[] args) {
-        System.out.println(Season.SPRING);
+        System.out.println(Season.SUMMER);
     }
 }
