@@ -1,0 +1,104 @@
+.java源文件和.class字节码文件
+
+基本类型：
+byte【1B=8b】,short【2B】,int【4B】,long【8B】。默认值0，long为0L
+float【4B】,double【8B】。默认值0.0f，0.0
+boolean【1b】,char【2B】。默认值false，0,’\u0000'
+
+String本质是char[]，常量，不会对本身造成影响
+String&StringBuffer&StringBuilder
+String：不可变字符串，可用+拼接
+StringBuffer：线程安全
+StringBuilder：线程不安全
+
+五个分支语句（if,if-else,if-else if-else,switch-case,三目），四个循环语句（while，do-while,for,foreach）
+
+数组最大存储为int最大值，2^31-1
+数组两种声明
+int[] i;int i[]；
+三种初始化
+i = new int[length];
+i = new int[]{};
+i = {};
+拷贝copyOf()
+打印Arrays.toString()
+数组下标0~.length-1
+增删改查
+
+集合框架放的都是引用类型
+集合框架两个接口：map【entry】，collection【单个元素】
+collections工具类【sort。。。】
+list【有序可重复】arraylist【add,remove,get】，linkedlist【区别，数组和双向链表，对首尾元素操作快】
+set【无序不可重复】hashset，treeset【排序，继承compareable或实现comparator接口】【add,foreach或iterator】
+map hashmap，treemap【put,remove】
+
+关键字
+true和false不是关键字是字面常量，goto是保留关键字
+static【类属性方法代码块】被static修饰的内部类无需实例化
+final【类属性方法】
+构造器特点&条件：
+1.初始化对象
+2.无返回值类型
+3.构造器名与类名一致
+4.未显式定义构造器编译器默认生成无参构造，已存在就不会生成
+父类静态代码块->子类静态代码块->父类实例（构造）代码块->父类构造器->子类实例代码块->子类构造器
+
+面向对象4点：
+1.类与对象：类用来描述对象的共同属性和行为，对象是一个类的实例
+2.继承：多个类中存在相同属性和行为时，将这些内容抽取到单独一个类中，那么多个类无需再定义这些属性和行为，只要继承那个类即可
+3.封装：隐藏对象的属性和实现细节，仅对外提供public访问
+4.多态：前提条件：1.继承关系 2.方法重写 3.父类引用指向子类对象 Override是多态的体现
+
+
+创建多线程【继承Thread，实现Runnable，实现Callable，FutureTask接收有返回值的多线程】
+程序，进程和线程：
+程序是静态的代码
+进程是程序的一次动态执行，他有自己的生命周期，通过PCB唯一标识，是系统分派资源的基本单位
+线程是进程的一个实体，是CPU调度的基本单位。一个进程可以创建和并发执行多个线程。多个线程共享进程中的资源。每个线程拥有独立的运行栈和程序计数器
+生命周期
+1.新建new：初始化线程对象
+2.就绪Runnable：调用start方法等待CPU调度
+3.运行Running：执行任务
+4.阻塞Blocked：没有抢到时间片，返回等待队列
+5.无限期挂起：wait()：释放锁和CPU进入挂起队列；join()：插队阻塞，调用该方法的线程立即执行，主线程(被调用的线程)立即挂起，直到调用join方法的线程结束
+6.有限期挂起：THread.sleep() 与wait不同的是该方法不会释放锁，等待时间结束后重新竞争CPU执行权
+7.终止：正常结束执行或使用stop
+同步【synchronized】
+死锁：
+1.互斥使用：资源只此一份
+2.不可抢占：资源只能占有者释主动放
+3.请求保持：占有一份资源的同时请求新资源
+4.循环等待：形成等待链
+
+IO流
+字节流Stream：单个字节，无缓冲区，任意类型。使用(len = is.read(buf)) != -1; os.writer(buf,0,len)
+字符流Reader&Writer：单个字符，有缓冲区，文本数据。使用r.ready遍历
+缓冲流Buffered：使用flush刷新；newline另起一行；skip跳过字符不会跳过换行；readline遍历
+对象流Object：实现Serializable接口，serialVersionUID
+
+泛型
+T type E element K key V value ？占位符
+上【super】下【extends】界
+
+枚举enumeration
+
+反射
+class Modifier【修饰符】method【方法】field【属性】 Constructor【构造器】
+
+数据库连接池：c3p0,druid,dbcp
+JDBC流程3306
+1.注册驱动Class.forname("com.mysql.cj.jdbc.Driver")
+2.获取连接对象DriverManager.getConnection
+3.获取执行器connection.creatStatement【connection.prepareStatement】
+4.执行sql语句，可能返回结果集ResultSet
+5.释放连接，先开后关
+语言：DDL定义，DCL控制，DML操作，DQL查询，TCL事务
+删除表结构和数据drop
+删除数据delete
+重置主键truncate
+
+网络通信
+TCP3次 UDP1次
+
+tomcat8080
+修改端口号conf->server.xml->connector
