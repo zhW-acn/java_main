@@ -4,7 +4,7 @@
 byte【1B=8b】,short【2B】,int【4B】,long【8B】。默认值0，long为0L
 float【4B】,double【8B】。默认值0.0f，0.0
 boolean【1b】,char【2B】。默认值false，0,’\u0000'
-
+ 
 String本质是char[]，常量，不会对本身造成影响
 String&StringBuffer&StringBuilder
 String：不可变字符串，可用+拼接
@@ -102,3 +102,65 @@ TCP3次 UDP1次
 
 tomcat8080
 修改端口号conf->server.xml->connector
+项目打包成war包，放到tomcat的webapps里，源代码编译成class文件放在WEB-INF/classes里
+
+
+JSP
+1.JSP是什么：HTML+JAVA
+2.三大元素：脚本，动作，指令
+	1.脚本：
+		声明【<%! %>】(全局变量，相当于属性值)
+		代码块【<% %>】
+		表达式【<%= %>】(没有;)，注释【<%-- --%>】
+	2.动作：【<jsp:userbean > 】【<jsp:include】【<jsp:forward】
+		JavaBean条件：
+			1.gettersetter
+			2.无参构造
+			3.public
+			4.具有包结构
+	3.指令：
+		1.page:针对当前页面的设置【页面缓存(buffer)，mime和字符集(contentType)，errorpage，导包(import)】
+		2.include【静态包含】
+		3.taglib【导入JSTL】
+3.四大作用域
+	1.page
+	2.request
+	3.session
+	4.application
+4.九大内置对象1
+	page pageContext request session application response config out exeption
+转发重定向和包含的区别
+1.url：转发【不变】重定向【改变】包含【不变】
+2.跳转方式：转发【S】重定向【C】包含【S】
+3.页面主权：转发【新】重定向【新】包含【老】
+4.页面内容：转发【新】重定向【新】包含【新+老】
+5.执行快慢：转发【一次，快】重定向【两次，慢】包含【快】
+6.是否可访问WEB-INf：与跳转方式相同
+7.实现方式：
+	转发【req.getRequestDispatcher;jsp:forward page=】
+	重定向【a href;location href;resp.sendRedirect;resp.setStatus,resp.setHeader("location","url");c:redirect】
+	包含【<%@include file%>;jsp:include;c:import】
+	
+servlet生命周期
+1.新建：调用构造函数
+2.初始化：在用户访问时调用init方法，init完成后Servlet实例会一直保持在内存中。使用load-on-starup=1设定非懒加载
+	在web.xml的servlet标签里配置init-param，param-name,param-value。注解：webinitparam
+	servletContext
+3.服务：调用service方法处理客户端请求
+4.销毁：调用distory方法，释放资源
+
+发送请求的方式：get/post/put/delete
+get和post的区别
+1.请求数：get和post都是基于TCP连接的请求。
+	get发送一次请求，客户端把请求信息和请求头一起发送，将请求数据以问号带参的键值对方式附加在url后。服务器响应200ok
+	post第一次发送请求头，服务端响应100continue后再发送请求体，服务器接收到后响应200ok
+2.请求快慢和大小
+	get请求相对快，因为它只发送一次请求。由于请求数据是拼接url，，所以传输大小有限制1k（这个传输大小指的是浏览器和服务器的限制），不支持文件传输。
+	post相对慢，因为它发送两次请求，请求数据在消息体中，所以没有传输大小限制（如果数据超过最大传输单位，TCP会分段发送）。支持文件传输
+	
+filter
+拦截Servlet请求
+与Servlet的区别
+相同点：都是Java类，有类似的生命周期doFilter(req,resp,chain)
+不同：初始化参数不一样【servlet-config；filter-config】；实现方式【继承HttpServlet；实现Filter接口】注册时【servler-name；dispath：request；forward；include；error】
+比servlet先初始化
