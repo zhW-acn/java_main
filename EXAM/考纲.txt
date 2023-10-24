@@ -3,7 +3,7 @@
 基本类型：
 byte【1B=8b】,short【2B】,int【4B】,long【8B】。默认值0，long为0L
 float【4B】,double【8B】。默认值0.0f，0.0
-boolean【1b】,char【2B】。默认值false，0,’\u0000'
+boolean【1b】,char【2B】。默认值false，0,'\u0000'
  
 String本质是char[]，常量，不会对本身造成影响
 String&StringBuffer&StringBuilder
@@ -96,6 +96,9 @@ JDBC流程3306
 删除表结构和数据drop
 删除数据delete
 重置主键truncate
+增：insert into table() values()
+删：delete from table where...
+改：update table set field=newValue... where...
 
 网络通信
 TCP3次 UDP1次
@@ -159,8 +162,27 @@ get和post的区别
 	post相对慢，因为它发送两次请求，请求数据在消息体中，所以没有传输大小限制（如果数据超过最大传输单位，TCP会分段发送）。支持文件传输
 	
 filter
+应用场景：检测用户登录，设置字符集，页面不缓存
 拦截Servlet请求
 与Servlet的区别
 相同点：都是Java类，有类似的生命周期doFilter(req,resp,chain)
 不同：初始化参数不一样【servlet-config；filter-config】；实现方式【继承HttpServlet；实现Filter接口】注册时【servler-name；dispath：request；forward；include；error】
 比servlet先初始化
+
+
+listener
+request session ServletContext
+
+el表达式：
+四个域对象：pageScope；requestScope；sessionScope；applicationScope
+内置对象：四个域对象+pageContext；cookie；param；paramValues；header；headerValues；initParam；cookie；param；paramValues；header；headerValues；initParam
+
+JSTL：减少JSP中的Java代码
+
+正则表达式：
+^ 开始
+$ 结束
+* 0和多次
+? 0或1次
++ 1或多次
+
